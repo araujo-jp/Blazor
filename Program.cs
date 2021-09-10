@@ -1,7 +1,11 @@
-using Microsoft.AspNetCore.Components;
 using Blazor.Data;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Components;
 
 var builder = WebApplication.CreateBuilder(args);
+
+// add database connection
+builder.Services.AddDbContext<DataBaseContext>(options => options.UseSqlite("Data source=dbBlazor.sqlite"));
 
 // Add services to the container.
 builder.Services.AddRazorPages();
