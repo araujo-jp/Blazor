@@ -25,6 +25,7 @@ namespace Blazor.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("name")
+                        .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("TEXT");
 

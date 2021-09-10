@@ -12,7 +12,7 @@ namespace Blazor.Migrations
                 {
                     id = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    name = table.Column<string>(type: "TEXT", maxLength: 100, nullable: true),
+                    name = table.Column<string>(type: "TEXT", maxLength: 100, nullable: false),
                     amount = table.Column<int>(type: "INTEGER", nullable: false),
                     value = table.Column<decimal>(type: "TEXT", nullable: false)
                 },

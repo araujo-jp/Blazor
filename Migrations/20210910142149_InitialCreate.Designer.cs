@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Blazor.Migrations
 {
     [DbContext(typeof(DataBaseContext))]
-    [Migration("20210910015855_InitialCreate")]
+    [Migration("20210910142149_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -27,6 +27,7 @@ namespace Blazor.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("name")
+                        .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("TEXT");
 
