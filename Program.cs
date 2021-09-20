@@ -1,6 +1,7 @@
 using Blazor.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Components;
+using MudBlazor.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,6 +11,7 @@ builder.Services.AddDbContext<DataBaseContext>(options => options.UseSqlite("Dat
 // Add services to the container.
 builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
+builder.Services.AddMudServices();
 builder.Services.AddSingleton<WeatherForecastService>();
 
 var app = builder.Build();
