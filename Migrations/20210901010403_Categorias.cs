@@ -1,50 +1,50 @@
 ﻿using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace Blazor.Migrations
+namespace LojaApp.Migrations
 {
-    public partial class Category : Migration
+    public partial class Categorias : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.AlterColumn<string>(
-                name: "name",
-                table: "Products",
+                name: "Nome",
+                table: "Produtos",
                 type: "TEXT",
-                maxLength: 100,
+                maxLength: 255,
                 nullable: true,
                 oldClrType: typeof(string),
                 oldType: "TEXT",
-                oldMaxLength: 100);
+                oldMaxLength: 255);
 
             migrationBuilder.AddColumn<int>(
-                name: "CategoryId",
-                table: "Products",
+                name: "CategoriaId",
+                table: "Produtos",
                 type: "INTEGER",
                 nullable: true);
 
             migrationBuilder.CreateTable(
-                name: "Category",
+                name: "Categorias",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    description = table.Column<string>(type: "TEXT", maxLength: 255, nullable: true)
+                    Descricao = table.Column<string>(type: "TEXT", maxLength: 255, nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Category", x => x.Id);
+                    table.PrimaryKey("PK_Categorias", x => x.Id);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Products_CategoryId",
-                table: "Products",
-                column: "CategoryId");
+                name: "IX_Produtos_CategoriaId",
+                table: "Produtos",
+                column: "CategoriaId");
 
             migrationBuilder.AddForeignKey(
-                name: "FK_Products_Category_CategoryId",
-                table: "Products",
-                column: "CategoryId",
-                principalTable: "Category",
+                name: "FK_Produtos_Categorias_CategoriaId",
+                table: "Produtos",
+                column: "CategoriaId",
+                principalTable: "Categorias",
                 principalColumn: "Id",
                 onDelete: ReferentialAction.Restrict);
         }
@@ -52,30 +52,30 @@ namespace Blazor.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropForeignKey(
-                name: "FK_Products_Category_CategoryId",
-                table: "Products");
+                name: "FK_Produtos_Categorias_CategoriaId",
+                table: "Produtos");
 
             migrationBuilder.DropTable(
-                name: "Category");
+                name: "Categorias");
 
             migrationBuilder.DropIndex(
-                name: "IX_Products_CategoryId",
-                table: "Products");
+                name: "IX_Produtos_CategoriaId",
+                table: "Produtos");
 
             migrationBuilder.DropColumn(
-                name: "CategoryId",
-                table: "Products");
+                name: "CategoriaId",
+                table: "Produtos");
 
             migrationBuilder.AlterColumn<string>(
-                name: "name",
-                table: "Products",
+                name: "Nome",
+                table: "Produtos",
                 type: "TEXT",
-                maxLength: 100,
+                maxLength: 255,
                 nullable: false,
                 defaultValue: "",
                 oldClrType: typeof(string),
                 oldType: "TEXT",
-                oldMaxLength: 100,
+                oldMaxLength: 255,
                 oldNullable: true);
         }
     }

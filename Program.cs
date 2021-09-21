@@ -1,18 +1,20 @@
-using Blazor.Data;
-using Microsoft.EntityFrameworkCore;
+using LojaApp.Data;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Components;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using MudBlazor.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// add database connection
-builder.Services.AddDbContext<DataBaseContext>(options => options.UseSqlite("Data source=dbBlazor.sqlite"));
-
 // Add services to the container.
+builder.Services.AddDbContext<LojaContext>(options => options.UseSqlite("Data source=LojaDb.sqlite"));
+
 builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
 builder.Services.AddMudServices();
-builder.Services.AddSingleton<WeatherForecastService>();
+
 
 var app = builder.Build();
 

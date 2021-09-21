@@ -1,0 +1,59 @@
+﻿@page "/categoria/add"
+@inject LojaContext loja
+
+<MudContainer Class="mt-16">
+
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <h2 class="text-center">Adicionar categoria</h2>
+            </div>
+            <div class="col-12">
+                @if (showLeaveAlert)
+                {
+                    <MudAlert Severity="Severity.Success" ContentAlignment="HorizontalAlignment.Center" ShowCloseIcon="true"
+                    CloseIconClicked="(() => CloseMe(true))">Categoria adicionada com sucesso
+                    </MudAlert>
+                }
+            </div>
+            <div class="col-6 mt-3 input-group mx-auto">
+                <input type="text" class="form-control" placeholder="Nova categoria" aria-label="Nova categoria"
+                    aria-describedby="button2" @bind="novaCategoria">
+                <button class="btn btn-outline-primary" type="button" id="button2" @onclick="Adicionar">Adicionar
+                    categoria</button>                    
+            </div>
+        </div>
+    </div>
+</MudContainer>
+@code {
+
+    private string novaCategoria;
+    private bool showCallAlert = true;
+    private bool showLeaveAlert = false;
+
+    private void CloseMe(bool value)
+    {
+        if (value)
+        {
+            showLeaveAlert = false;
+        }
+        else
+        {
+            showCallAlert = false;
+        }
+    }
+
+    private void Adicionar()
+    {
+        var categoria = new Categoria
+        {
+            Descricao = novaCategoria
+        };
+        loja.Categorias.Add(categoria);
+        loja.SaveChanges();
+
+        showLeaveAlert = true;
+        novaCategoria = "";
+    }
+
+}

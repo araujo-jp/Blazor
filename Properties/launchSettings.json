@@ -3,12 +3,12 @@
     "windowsAuthentication": false,
     "anonymousAuthentication": true,
     "iisExpress": {
-      "applicationUrl": "http://localhost:34353",
-      "sslPort": 44363
+      "applicationUrl": "http://localhost:14086",
+      "sslPort": 44320
     }
   },
   "profiles": {
-    "Blazor": {
+    "LojaApp": {
       "commandName": "Project",
       "dotnetRunMessages": true,
       "launchBrowser": true,

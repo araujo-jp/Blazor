@@ -1,7 +1,7 @@
-namespace Blazor.Models;
+﻿namespace LojaApp.Models;
 
-public class TodoModel 
+public class TodoModel
 {
-  public string? Title { get; set; }
-  public bool HasCompleted { get; set; }
+    public string? Titulo { get; set; }
+    public bool Feito { get; set; }
 }
