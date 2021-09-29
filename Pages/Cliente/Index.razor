@@ -1,0 +1,62 @@
+@page "/cliente/index"
+@page "/cliente"
+
+@inject LojaContext db;
+
+<MudContainer Class="mt-16 mb-10">
+    <MudText Typo="Typo.h5">Lista de Clientes</MudText>
+    <div class="col mt-5 mb-5">
+        <MudButton Variant="Variant.Filled" Color="Color.Primary" Link="/cliente/add">
+            Adicionar Cliente            
+        </MudButton>
+    </div>
+    <MudTable Items="@Cliente" MultiSelection="true" Bordered="false" Hover="true"
+        Filter="new Func<Cliente,bool>(FilterFunc1)" @bind-SelectedItem="selectedItem1">
+        <ToolBarContent>
+            <MudTextField @bind-Value="searchString1" Placeholder="Pesquisar Cliente" Adornment="Adornment.Start"
+                AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0"></MudTextField>
+        </ToolBarContent>
+        <HeaderContent>
+            <MudTh>
+                <MudTableSortLabel SortBy="new Func<Cliente, object>(x=>x.Id)">Nome</MudTableSortLabel>
+            </MudTh>
+            <MudTh>
+                <MudTableSortLabel SortBy="new Func<Cliente, object>(x=>x.Nome)">Email</MudTableSortLabel>
+            </MudTh>
+        </HeaderContent>
+        <RowTemplate>
+            <MudTd DataLabel="Nr">@context.Nome</MudTd>
+            <MudTd DataLabel="Sign">@context.Email</MudTd>
+        </RowTemplate>
+        <PagerContent>
+            <MudTablePager />
+        </PagerContent>
+    </MudTable>
+</MudContainer>
+
+
+@code {
+    private IEnumerable<Cliente> Cliente { get; set; }
+
+    private Cliente? selectedItem1 = null;
+
+    private string searchString1 = "";
+    private string searchString2 = "";
+
+    protected override async Task OnInitializedAsync()
+    {
+        Cliente = await db.Cliente.ToListAsync();
+    }
+
+    private bool FilterFunc1(Cliente cliente) => FilterFunc(cliente, searchString1);
+
+    private bool FilterFunc(Cliente cliente, string searchString)
+    {
+        if (string.IsNullOrWhiteSpace(searchString))
+            return true;
+        if (cliente.Nome.Contains(searchString, StringComparison.OrdinalIgnoreCase))
+            return true;
+        return false;
+    }
+
+}

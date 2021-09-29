@@ -1,0 +1,155 @@
+@page "/cliente/add"
+
+@inject LojaContext db;
+
+<MudContainer Class="mt-16">
+
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <h2 class="text-center">Adicionar Cliente</h2>
+      </div>
+      <div class="col-12">
+        @if (showLeaveAlert)
+        {
+          <MudAlert Severity="Severity.Success" ContentAlignment="HorizontalAlignment.Center" ShowCloseIcon="true"
+          CloseIconClicked="(() => CloseMe(true))">Cliente adicionado com sucesso
+          </MudAlert>
+        }
+      </div>
+
+      <div class="conatiner mx-auto">
+        <div class="row">
+          <div class="col-6 mt-3 input-group mx-auto">
+            <div class="input-group input-group-lg">
+              <span class="input-group-text" id="nome">Nome</span>
+              <input type="text" class="form-control" aria-describedby="nome" @bind="nome">
+            </div>
+          </div>
+
+          <div class="col-6 mt-3 input-group mx-auto">
+            <div class="input-group input-group-lg">
+              <span class="input-group-text" id="cpf">CPF</span>
+              <input type="number" class="form-control" @bind="cpf">
+            </div>
+          </div>
+
+          <div class="col-4 mt-3 input-group mx-auto">
+            <div class="input-group input-group-lg">
+              <span class="input-group-text" id="email">Email</span>
+              <input type="email" class="form-control" @bind="email">
+            </div>
+          </div>
+
+          <div class="col-4 mt-3 input-group mx-auto">
+            <div class="input-group input-group-lg">
+              <span class="input-group-text" id="telefone">Telefone</span>
+              <input type="number" class="form-control" @bind="telefone">
+            </div>
+          </div>
+
+          <div class="col-4 mt-3 input-group mx-auto">
+            <div class="input-group input-group-lg">
+              <span class="input-group-text" id="sexo">Sexo</span>
+              <input type="text" class="form-control" @bind="sexo">
+            </div>
+          </div>
+
+          <div class="col-6 mt-3 input-group mx-auto">
+            <div class="input-group input-group-lg">
+              <span class="input-group-text" id="estadoCivil">Estado Civil</span>
+              <input type="text" class="form-control" @bind="estadoCivil">
+            </div>
+          </div>
+
+          <div class="col-6 mt-3 input-group mx-auto">
+            <div class="input-group input-group-lg">
+              <span class="input-group-text" id="escolaridade">Escolaridade</span>
+              <input type="text" class="form-control" @bind="escolaridade">
+            </div>
+          </div>
+
+          <div class="col-4 mt-3 input-group mx-auto">
+            <div class="input-group input-group-lg">
+              <span class="input-group-text" id="dataNascimento">Data Nascimento</span>
+              <input type="text" class="form-control" @bind="dataNascimento">
+            </div>
+          </div>
+
+          <div class="col-8 mt-3 input-group mx-auto">
+            <div class="input-group input-group-lg">
+              <span class="input-group-text" id="dataNascimento">Endereço</span>
+              <input type="text" class="form-control" @bind="endereco">
+            </div>
+          </div>         
+
+        </div>
+        <div class="row  mx-auto mt-5">
+          <div class="mx-auto mt-5">            
+          <MudButton Variant="Variant.Filled" Color="Color.Primary" Link="/cliente/">
+            Lista de clientes           
+          </MudButton>
+          <button class="btn btn-outline-primary" type="button" id="button2" @onclick="Adicionar">
+            Adicionar Cliente
+          </button>
+          </div>
+        </div>
+      </div>
+
+
+
+
+    </div>
+  </div>
+
+</MudContainer>
+
+
+
+
+@code {
+
+  private string? nome;
+  private int cpf;
+  private int telefone;
+  private string? email;
+  private string? sexo;
+  private string? estadoCivil;
+  private string? escolaridade;
+  private string? dataNascimento;
+  private string? endereco;
+  private bool showCallAlert = true;
+  private bool showLeaveAlert = false;
+
+  private void CloseMe(bool value)
+  {
+    if (value)
+    {
+      showLeaveAlert = false;
+    }
+    else
+    {
+      showCallAlert = false;
+    }
+  }
+
+  private void Adicionar()
+  {
+    var cliente = new Cliente
+    {
+      Nome = nome,
+      Cpf = cpf,
+      Telefone = telefone,
+      Email = email,
+      Sexo = sexo,
+      EstadoCivil = estadoCivil,
+      Escolaridade = escolaridade,
+      DataNascimento = dataNascimento,
+      Endereco = endereco,
+    };
+    db.Cliente.Add(cliente);
+    db.SaveChanges();
+    showLeaveAlert = true;
+  }
+
+}
